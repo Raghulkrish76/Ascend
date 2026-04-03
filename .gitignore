@@ -1,0 +1,13 @@
+# Python (Backend)
+ascend-backend/venv/
+ascend-backend/__pycache__/
+ascend-backend/db.sqlite3
+
+# Node (Frontend)
+ascend-frontend/node_modules/
+
+# Env files
+.env
+
+# Misc
+.DS_Store
