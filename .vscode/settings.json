@@ -1,0 +1,5 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+
+    "python.defaultInterpreterPath": "G:\\IT Projects\\Ascend\\ascend-backend\\venv\\Scripts\\python.exe"
+}
