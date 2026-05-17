@@ -4,6 +4,7 @@ import { Home } from "./pages/Home"
 import { Login } from "./pages/Login"
 import { Register } from "./pages/Register"
 import { CreateJob } from "./components/CreateJobForm"
+import { JobDetailPage } from "./pages/JobDetailPage"
 function App() {
   return (
     <>
@@ -20,6 +21,17 @@ function App() {
             <CreateJob/>
           </ProtectedRoute>
         }/>
+
+
+        <Route
+          path  = "/jobs/:id" element = {
+            <ProtectedRoute>
+              <JobDetailPage/>
+            </ProtectedRoute>
+          }
+        
+        
+        />
       </Routes>
       </BrowserRouter>
     </>

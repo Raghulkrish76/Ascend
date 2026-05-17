@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 export function Home(){
 
     const [jobs,setJobs] = useState([])
@@ -24,7 +25,7 @@ export function Home(){
          {jobs.map((job)=>{
             return(
                 <div key = {job.id}>
-                 <h2>{job.title}</h2>
+                <Link to={`/jobs/${job.id}`}> <h2>{job.title}</h2></Link>
                  <p>{job.skills_requires}</p>
                  <p>{job.company_name}</p>
                  <p>{job.description}</p>
