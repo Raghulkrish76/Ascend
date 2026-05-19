@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 export function JobDetailPage() {
     const [jobDetail, setJobDetail] = useState([])
 
-
+    const {id} = useParams()
     const [title, setTitle] = useState("")
     const [companyName, setCompanyName] = useState("")
     const [description, setDescription] = useState("")
@@ -18,8 +18,15 @@ export function JobDetailPage() {
 
     const [editMode, setEditMode] = useState(false)
     const { isAdmin } = useAuth()
-    const { id } = useParams()
     const navigate = useNavigate()
+
+    const [students,setStudents] = useState({})
+    const [addStudentsMode,setAddStudentsMode] = useState(false)
+
+    const [selectedStudentsForDrive,setSelectedStudentsForDrive] = useState([])
+
+    const [studentsinthisDrive,setStudentsinthisDrive] = useState([])
+    const [studentinthisDriveMode,setStudentsinthisDriveMode] = useState(false)
     useEffect(() => {
         api.get(`/api/jobs/${id}`)
             .then((response) => {
@@ -30,7 +37,7 @@ export function JobDetailPage() {
 
     const handleDelete = async () => {
         try {
-            await api.delete(`/api/jobs/delete/${id}/`)
+            await api.delete(`/api/jobs/delete/${id}/`,{students : selectedStudentsForDrive})
             alert("Job post deleted successfully ")
             navigate("/")
 
@@ -74,8 +81,58 @@ export function JobDetailPage() {
         }
     }
 
+    const listStudents = async()=>{
+        try{
+            await api.get("/api/students/")
+            .then((response)=>{
+                setStudents(response.data)
+                setAddStudentsMode(true)
+                
+            })
+        }catch(error){
+            console.log(error)
+            alert("Error in Fetching Students")
+        }
+    }
 
+    
+    function  handleCheckbox(studentId){
+        if (selectedStudentsForDrive.includes(studentId)){
+            setSelectedStudentsForDrive(selectedStudentsForDrive.filter(
+                id => id!==studentId
+            ))
+        }
+        else{
+            setSelectedStudentsForDrive([...selectedStudentsForDrive,studentId])
+        }
+    }
 
+    const handleAddStudents = async()=>{
+        try{
+           
+            await api.post(`/api/application/create/${id}/`,{students:selectedStudentsForDrive})
+            alert("Added Students successfully")
+            setAddStudentsMode(false)
+        
+           
+        }catch(error){
+            console.log(error)
+            alert("Error in adding students to the drive ")
+        }
+    }
+    const handleStudentsinthisDrive = async()=>{
+        try {
+            const res = await api.get(`/api/application/job/${id}`)
+            console.log(res.data)
+            setStudentsinthisDrive(res.data)
+            setStudentsinthisDriveMode(true)
+
+            
+        }catch(error){
+            console.log(error.data)
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -154,8 +211,46 @@ export function JobDetailPage() {
                         </>
 
                     )}
+                    <button onClick={listStudents}>Add Students </button>
+                    {addStudentsMode&&(
+                        <>
+                            {students.map((student)=>{
+                                return(
+                                    <div key = {student.id}>
 
+                                    <input
+                                    type = "checkbox"
+                                    checked = {selectedStudentsForDrive.includes(student.id)}
+                                    onChange={()=>handleCheckbox(student.id)}    
+                                
+                                    />
+                                    <span> {student.username} </span>
+                                    </div>
+
+                                )
+                            })}
+                            <button onClick = {handleAddStudents}>Add selected students </button>
+                            
+                        </>
+
+                    )}
+                    <button onClick={handleStudentsinthisDrive}>Students in this drive </button>
+                    {studentinthisDriveMode&&(
+                        <>
+                        {studentsinthisDrive.map((application)=>{
+                            return(
+                                <div key = {application.id}>
+                                <p>{application.student.username}</p>
+                                </div>
+                            )
+                        })}
+                             
+                        </>
+                    )}
                 </>
+            
+                    
+            
             )}
         </>
     )

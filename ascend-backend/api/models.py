@@ -20,4 +20,20 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
-    
+class Application(models.Model):
+
+    class meta:
+        unique_together = ['student','job']
+    STATUS_CHOICES = [
+        ("requested","Requested"),
+        ("approved","Approved"),
+        ("shortlisted","Shortlisted"),
+        ("rejected","Rejected"),
+        ("selected","Selected"),
+    ]
+
+    student = models.ForeignKey(User,on_delete=models.CASCADE)
+    job = models.ForeignKey(Job,on_delete=models.CASCADE)
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default = "requested")
+    applied_at = models.DateTimeField(auto_now_add=True)
+

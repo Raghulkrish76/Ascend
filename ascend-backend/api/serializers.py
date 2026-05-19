@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User,Job
+from .models import User,Job,Application
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class UserSerializer(serializers.ModelSerializer):
     admin_token = serializers.CharField(write_only=True,required=False)
@@ -38,3 +38,12 @@ class JobSerializer(serializers.ModelSerializer):
         model = Job 
         fields = '__all__'
         read_only_fields = ['posted_by']
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    
+    student = UserSerializer(read_only = True)
+    job = JobSerializer(read_only = True)
+    
+    class Meta:
+        model = Application
+        fields = '__all__'
