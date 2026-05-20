@@ -37,3 +37,17 @@ class Application(models.Model):
     status = models.CharField(max_length=20,choices=STATUS_CHOICES,default = "requested")
     applied_at = models.DateTimeField(auto_now_add=True)
 
+class StudentProfile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    studentname = models.CharField(max_length=255)
+    batch = models.CharField(max_length=35)
+    phone = models.CharField(max_length=15,blank = True)
+    department = models.CharField(max_length=255,blank=True)
+    cgpa = models.DecimalField(max_digits=4,decimal_places = 2 ,null = True,blank = True)
+    skills = models.CharField(max_length=255)
+    resume = models.FileField(upload_to = 'resumes/',null = True,blank = True)
+    year_of_study = models.IntegerField(null=True,blank = True)
+
+    
+    def __str__(self):
+        return self.studentname

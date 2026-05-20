@@ -5,6 +5,7 @@ import { Login } from "./pages/Login"
 import { Register } from "./pages/Register"
 import { CreateJob } from "./components/CreateJobForm"
 import { JobDetailPage } from "./pages/JobDetailPage"
+import { CreateStudentProfile } from "./pages/CreateStudentProfile"
 function App() {
   return (
     <>
@@ -31,6 +32,11 @@ function App() {
           }
         
         
+        />
+
+        <Route   
+        path = "create/studentprofile"
+        element = {<CreateStudentProfile/>}
         />
       </Routes>
       </BrowserRouter>

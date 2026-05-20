@@ -2,6 +2,7 @@ from django.urls import path
 from .views import JobListView,CreateJobView
 from .views import JobUpdateView,JobDeleteView,JobDetailView
 from .views import StudentsList
+from .views import CreateStudentProfileView,StudentProfileExistsView
 from .views import CreateApplicationView,JobApplicationView
 urlpatterns=[
 
@@ -12,6 +13,9 @@ urlpatterns=[
     path('jobs/delete/<int:pk>/',JobDeleteView.as_view(),name = "delete-view"),
     path('students/',StudentsList.as_view(),name = "students-list"),
     path('application/create/<int:job_id>/',CreateApplicationView.as_view(),name = "create-application"),
-    path('application/job/<int:job_id>',JobApplicationView.as_view(),name = "Job-applications")
+    path('application/job/<int:job_id>',JobApplicationView.as_view(),name = "Job-applications"),
+    path('studentprofile/create/',CreateStudentProfileView.as_view(),name = "create-studentprofile"),
+    path('studentprofile/exists/',StudentProfileExistsView.as_view(),name = "student-profile-exists")
+
 
 ]

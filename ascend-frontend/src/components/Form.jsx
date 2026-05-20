@@ -24,14 +24,23 @@ export function Form({route,method}){
             if(method === 'login'){
                 localStorage.setItem(ACCESS_TOKEN,res.data.access)
                 localStorage.setItem(REFRESH_TOKEN,res.data.refresh)
-                navigate("/")
+                
+                const profileRes = await api.get("/api/studentprofile/exists/")
+                if(profileRes.data.exists){
+                    navigate("/")
+                }
+                else{
+
+                    navigate("/create/studentprofile/")
+                }
                 
             }
             else{
                 navigate("/login")
             }
         }catch(error){
-            alert(error)
+            alert(error.response.data)
+            alert(JSON.stringify(error.response.data))
         }
         finally{
             setLoading(false)

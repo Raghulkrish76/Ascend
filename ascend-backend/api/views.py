@@ -3,12 +3,13 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.generics import CreateAPIView,DestroyAPIView,UpdateAPIView
 from rest_framework.views import APIView
-from .models import User,Job,Application
+from .models import User,Job,Application,StudentProfile
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from .serializers import UserSerializer,JobSerializer,ApplicationSerializer
 from .permissions import IsAdmin
 from .serializers import AscendTokenSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import StudentProfileSerializer
 
 class AscendTokenView(TokenObtainPairView):
     serializer_class = AscendTokenSerializer
@@ -89,3 +90,24 @@ class JobApplicationView(APIView):
 
         return Response(serializer.data)
 
+
+class CreateStudentProfileView(generics.CreateAPIView):
+    queryset = StudentProfile.objects.all()
+    serializer_class = StudentProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self,serializer):
+        serializer.save(user=self.request.user)
+
+class StudentProfileExistsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+
+    def get(self,request):
+        profile = StudentProfile.objects.filter(user=request.user).first()
+
+        if profile:
+            return Response({'exists':True})
+        else:
+            return Response({'exists':False})
+        

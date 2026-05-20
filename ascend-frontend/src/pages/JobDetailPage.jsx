@@ -56,7 +56,7 @@ export function JobDetailPage() {
         setLocation(jobDetail.location)
         setEditMode(true)
     }
-
+ 
     const handleUpdate = async () => {
         const data = {
 

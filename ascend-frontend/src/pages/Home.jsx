@@ -2,10 +2,12 @@ import { useEffect,useState } from "react"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+import useAuth from "../hooks/useAuth"
 export function Home(){
 
     const [jobs,setJobs] = useState([])
     const navigate = useNavigate()
+    const {isAdmin}  = useAuth()
     
     useEffect(()=>{
         api.get("/api/jobs/")
@@ -22,6 +24,11 @@ export function Home(){
     return(
         <>
          <p> THIS IS HOME PAGE !! fg</p>
+         {!isAdmin &&(
+            <>
+               <button> Create Student Profile </button> 
+            </>
+         )}
          {jobs.map((job)=>{
             return(
                 <div key = {job.id}>
