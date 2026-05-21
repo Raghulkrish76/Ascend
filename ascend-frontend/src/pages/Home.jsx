@@ -3,6 +3,7 @@ import api from "../api"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
+import { Navbar } from "../components/Navbar"
 export function Home(){
 
     const [jobs,setJobs] = useState([])
@@ -23,6 +24,7 @@ export function Home(){
     },[])
     return(
         <>
+        <Navbar/>
          <p> THIS IS HOME PAGE !! fg</p>
          {!isAdmin &&(
             <>
