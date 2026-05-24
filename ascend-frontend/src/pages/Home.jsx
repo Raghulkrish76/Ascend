@@ -26,10 +26,17 @@ export function Home(){
         <>
         <Navbar/>
          <p> THIS IS HOME PAGE !! fg</p>
+          
          {!isAdmin &&(
+            
             <>
+            
                <button> Create Student Profile </button> 
             </>
+         )}
+         {isAdmin &&(
+            <button
+            onClick={()=>navigate("/jobs/create/")}>Post a job + </button>
          )}
          {jobs.map((job)=>{
             return(
@@ -47,9 +54,7 @@ export function Home(){
             
          })}
 
-         <button
-            onClick={()=>navigate("/jobs/create/")}
-         >Post a job + </button>
+        
         </>
     )
 }

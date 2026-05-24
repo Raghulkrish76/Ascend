@@ -75,10 +75,33 @@ class CreateApplicationView(APIView):
                 job=job,
 
                 defaults = {
-                    "status":"approved"
+                    "drivestatus":"approved"
                 }
             )
         return Response({"Students added"})
+    
+class CreateRequestedApplicationView(APIView):
+    serializer_class = ApplicationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self,request,job_id):
+
+        job = Job.objects.get(id=job_id)
+        student = User.objects.get(id=request.user.id)
+        Application.objects.get_or_create(
+                student=student,
+                job=job,
+
+                defaults = {
+                    "drivestatus":"requested"
+                }
+            )
+        return Response({"Student Requested "})
+
+
+
+
+
 
 class JobApplicationView(APIView):
     permission_classes = [IsAdmin]
@@ -111,3 +134,53 @@ class StudentProfileExistsView(APIView):
         else:
             return Response({'exists':False})
         
+class RequestedStudentsView(APIView):
+    serializer_class = ApplicationSerializer
+    permission_classes = [IsAdmin]
+
+    def get(self,request,job_id):
+        requested_students = Application.objects.filter(drivestatus = "requested",job=job_id)
+        serializer = ApplicationSerializer(requested_students,many=True)
+
+        return Response(serializer.data)
+
+class UpdateApplicationforRequestedStudents(APIView):
+    permission_classes = [IsAdmin]
+    
+    def post(self,request,job_id):
+        student_ids = request.data.get("students",[])
+        applications = Application.objects.filter(
+            job = job_id,
+            student = student_ids,
+            drivestatus = "requested"
+        )
+        applications.update(drivestatus="approved")
+        return Response({"messages":"Students approved"})
+    
+class UpdateShortlistedStudents(APIView):
+    permission_classes = [IsAdmin]
+
+    def post(self,request,job_id):
+        shortlisted_ids = request.data.get("shortlisted_ids",[])
+
+        applications = Application.objects.filter(
+            job = job_id,
+            roundstatus = "none"
+        )
+        for application in applications:
+            if application.id in shortlisted_ids:
+                application.roundstatus = "shortlisted"
+            else:
+                application.roundstatus = "eliminated"
+            application.save()
+        return Response({"message":"Students Shortlisted"})   
+
+class ViewShortlisted(APIView):
+    permission_classes = [IsAdmin]
+
+    def get(self,request,job_id):
+        applications = Application.objects.filter(job=job_id,roundstatus = "shortlisted")
+        serializer = ApplicationSerializer(applications,many=True)
+
+        return Response(serializer.data)
+    

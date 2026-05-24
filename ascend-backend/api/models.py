@@ -22,19 +22,25 @@ class Job(models.Model):
         return self.title
 class Application(models.Model):
 
-    class meta:
+    class Meta:
         unique_together = ['student','job']
-    STATUS_CHOICES = [
+    DRIVE_STATUS_CHOICES = [
         ("requested","Requested"),
         ("approved","Approved"),
-        ("shortlisted","Shortlisted"),
         ("rejected","Rejected"),
+    ]
+    ROUND_STATUS_CHOICES = [
+        ("none","None"),
+        ("shortlisted","Shortlisted"),
+        ("eliminated","Eliminated"),
         ("selected","Selected"),
     ]
 
+
     student = models.ForeignKey(User,on_delete=models.CASCADE)
     job = models.ForeignKey(Job,on_delete=models.CASCADE)
-    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default = "requested")
+    drivestatus = models.CharField(max_length=20,choices=DRIVE_STATUS_CHOICES,default = "requested")
+    roundstatus = models.CharField(max_length=20,choices=ROUND_STATUS_CHOICES,default = "none")
     applied_at = models.DateTimeField(auto_now_add=True)
 
 class StudentProfile(models.Model):

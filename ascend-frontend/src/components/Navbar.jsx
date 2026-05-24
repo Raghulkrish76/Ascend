@@ -7,7 +7,7 @@ export function Navbar() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "18px 40px",
-        backgroundColor: "#7C3AED",
+        backgroundColor: "#4700c3",
         color: "white",
         boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
     }
