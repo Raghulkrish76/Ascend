@@ -107,7 +107,18 @@ class JobApplicationView(APIView):
     permission_classes = [IsAdmin]
 
     def get(self,request,job_id):
-        applications = Application.objects.filter(job=job_id)
+        shortlisted_applications = Application.objects.filter(job=job_id,roundstatus= "shortlisted")
+
+        if shortlisted_applications.exists()==False:
+            applications = Application.objects.filter(
+                job=job_id,
+                drivestatus = "approved"
+            )
+        else:
+            applications = Application.objects.filter(
+                job=job_id,
+                roundstatus = "shortlisted"
+            )
 
         serializer = ApplicationSerializer(applications,many=True)
 
@@ -147,11 +158,12 @@ class RequestedStudentsView(APIView):
 class UpdateApplicationforRequestedStudents(APIView):
     permission_classes = [IsAdmin]
     
-    def post(self,request,job_id):
-        student_ids = request.data.get("students",[])
+    def patch(self,request,job_id):
+        application_ids = request.data.get("students",[])
+        
         applications = Application.objects.filter(
+            id__in = application_ids,
             job = job_id,
-            student = student_ids,
             drivestatus = "requested"
         )
         applications.update(drivestatus="approved")
@@ -162,14 +174,14 @@ class UpdateShortlistedStudents(APIView):
 
     def post(self,request,job_id):
         shortlisted_ids = request.data.get("shortlisted_ids",[])
+        roundstatus = request.data.get("roundstatus")
 
         applications = Application.objects.filter(
             job = job_id,
-            roundstatus = "none"
         )
         for application in applications:
             if application.id in shortlisted_ids:
-                application.roundstatus = "shortlisted"
+                application.roundstatus = roundstatus
             else:
                 application.roundstatus = "eliminated"
             application.save()

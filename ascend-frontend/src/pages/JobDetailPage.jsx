@@ -190,12 +190,12 @@ export function JobDetailPage() {
 
     const handleAddRequestedStudents = async () => {
         try {
-            await api.post(`/api/application/approve/${id}/`, {
+            await api.patch(`/api/application/approve/${id}/`, {
                 students: requestedSelectedStudentsforDrive
             })
 
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
         }
     }
     const handleShowStudentsforShortlisting = async () => {
@@ -216,7 +216,7 @@ export function JobDetailPage() {
     }
     const handleShortlistings = async () => {
         try {
-            await api.post(`/api/shortlisted/update/${id}/`, { shortlisted_ids: shorlistedApplications })
+            await api.post(`/api/shortlisted/update/${id}/`, { shortlisted_ids: shorlistedApplications ,roundstatus:"shortlisted"})
             alert("Successfully Shortlisted")
         } catch (error) {
             console.log(error.response.data)
@@ -233,6 +233,17 @@ export function JobDetailPage() {
             setViewShortlistedStudentsMode(true)
         }catch(error){
             console.log(error)
+        }
+    }
+    const handleSelect = async()=>{
+        try{
+            await api.post(`/api/shortlisted/update/${id}/`,{
+                shortlisted_ids:shorlistedApplications,roundstatus : "selected"
+              
+            })
+              alert("Successuly Selected Students")
+        }catch(error){
+            console.log(error.response.data)
         }
     }
     return (
@@ -397,9 +408,10 @@ export function JobDetailPage() {
 
                             }
                             <button onClick={handleShortlistings}> Shortlist Selected </button>
+                            <button onClick = {handleSelect}> Select as Final Students</button>
                         </>
                     )}
-
+                   
                 </>
 
 
