@@ -7,6 +7,7 @@ import { CreateJob } from "./components/CreateJobForm"
 import { JobDetailPage } from "./pages/JobDetailPage"
 import { CreateStudentProfile } from "./pages/CreateStudentProfile"
 import { Profile } from "./pages/Profile"
+import { MyDrives } from "./pages/MyDrives"
 function App() {
   return (
     <>
@@ -50,6 +51,18 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+          path = "mydrives/"
+          element = {
+            <ProtectedRoute>
+            <MyDrives/>
+            </ProtectedRoute>
+          }
+          />
+
+
+
         </Routes>
       </BrowserRouter>
     </>

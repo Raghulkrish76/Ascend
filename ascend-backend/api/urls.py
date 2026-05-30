@@ -7,7 +7,7 @@ from .views import CreateApplicationView,JobApplicationView
 from .views import CreateRequestedApplicationView
 from .views import RequestedStudentsView,UpdateApplicationforRequestedStudents
 from .views import UpdateShortlistedStudents,ViewShortlisted
-from .views import StudentDetailsView
+from .views import StudentDetailsView,MyDrivesView
 urlpatterns=[
 
     path('jobs/',JobListView.as_view(),name = "job-list"),
@@ -26,8 +26,5 @@ urlpatterns=[
     path("application/approve/<int:job_id>/",UpdateApplicationforRequestedStudents.as_view(),name = "approve-requested-students"),
     path("shortlisted/update/<int:job_id>/",UpdateShortlistedStudents.as_view(),name = "update-shortlistedStudents"),
     path('application/shortlisted/<int:job_id>',ViewShortlisted.as_view(),name = "View-shortlisted"),
-    
-    
-
-
+    path('mydrives/',MyDrivesView.as_view(),name = "My-Drives"),
 ]

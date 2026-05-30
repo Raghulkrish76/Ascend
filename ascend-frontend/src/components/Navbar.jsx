@@ -56,8 +56,8 @@ export function Navbar() {
                     </li>
 
                     <li>
-                        <Link style={linkStyle} to="/applications">
-                            My Applications
+                        <Link style={linkStyle} to="/mydrives">
+                            My Drives
                         </Link>
                     </li>
 

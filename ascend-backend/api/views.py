@@ -201,4 +201,12 @@ class StudentDetailsView(generics.RetrieveAPIView):
     
     def get_object(self):
         return StudentProfile.objects.get(user = self.request.user)
+    
+class MyDrivesView(generics.ListAPIView):
+    serializer_class = ApplicationSerializer
+    permission_classes =[IsAuthenticated]
+
+    def get_queryset(self):
+        return Application.objects.filter(student=self.request.user)
+    
 
