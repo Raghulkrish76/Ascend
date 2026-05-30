@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
-import api from "../api"
 import { useParams } from "react-router-dom"
-import useAuth from "../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
-import "../styles/JobDetails.css"
 import { Navbar } from "../components/Navbar"
 import { JobInfoCard } from "../components/job/JobInfoCard"
 import { EditJobForm } from "../components/job/EditJobForm"
 import { AddStudents } from "../components/job/AddStudents"
+import api from "../api"
+import useAuth from "../hooks/useAuth"
+import "../styles/JobDetails.css"
 
 export function JobDetailPage() {
     const [jobDetail, setJobDetail] = useState([])

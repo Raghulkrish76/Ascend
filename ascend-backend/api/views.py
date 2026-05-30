@@ -195,3 +195,10 @@ class ViewShortlisted(APIView):
 
         return Response(serializer.data)
     
+class StudentDetailsView(generics.RetrieveAPIView):
+    serializer_class = StudentProfileSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_object(self):
+        return StudentProfile.objects.get(user = self.request.user)
+

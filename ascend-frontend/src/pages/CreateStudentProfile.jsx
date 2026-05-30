@@ -1,7 +1,8 @@
 import { useEffect, useState, } from "react"
-import api from "../api"
 import useAuth from "../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
+import { Navbar } from "../components/Navbar"
+import api from "../api"
 
 export function CreateStudentProfile() {
     const [studentName, setStudentName] = useState("")
@@ -46,6 +47,7 @@ export function CreateStudentProfile() {
     })
     return (
         <>
+            <Navbar/>
             <form>
                 <input
                     type="text"
