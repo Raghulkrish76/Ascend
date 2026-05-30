@@ -1,37 +1,33 @@
-
 import { useEffect, useState } from "react"
 import api from "../api"
 import { useParams } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
+import "../styles/JobDetails.css"
+import { Navbar } from "../components/Navbar"
+import { JobInfoCard } from "../components/job/JobInfoCard"
+import { EditJobForm } from "../components/job/EditJobForm"
+import { AddStudents } from "../components/job/AddStudents"
+
 export function JobDetailPage() {
     const [jobDetail, setJobDetail] = useState([])
 
     const { id } = useParams()
-    const [title, setTitle] = useState("")
-    const [companyName, setCompanyName] = useState("")
-    const [description, setDescription] = useState("")
-    const [skills, setSkills] = useState("")
-    const [stipend, setStipend] = useState("")
-    const [salary, setSalary] = useState("")
-    const [location, setLocation] = useState("")
 
     const [editMode, setEditMode] = useState(false)
     const { isAdmin } = useAuth()
     const navigate = useNavigate()
 
-    const [students, setStudents] = useState({})
+   
     const [addStudentsMode, setAddStudentsMode] = useState(false)
 
-    const [selectedStudentsForDrive, setSelectedStudentsForDrive] = useState([])
+    
 
     const [studentsinthisDrive, setStudentsinthisDrive] = useState([])
     const [studentinthisDriveMode, setStudentsinthisDriveMode] = useState(false)
 
     const [requestedStudents, setRequestedStudents] = useState([])
     const [requestedStudentsMode, setRequestedStudentsMode] = useState(false)
-
-
     const [requestedSelectedStudentsforDrive, setRequestedSelectedStudentsforDrive] = useState([])
 
 
@@ -39,7 +35,10 @@ export function JobDetailPage() {
     const [shorlistedApplications, setShortlistedApplications] = useState([])
 
     const [shorlistedStudentsforthisDrive, setShorlistedStudentsforthisDrive] = useState([])
-    const [viewShorlistedStudentsMode,setViewShortlistedStudentsMode] = useState(false)
+    const [viewShorlistedStudentsMode, setViewShortlistedStudentsMode] = useState(false)
+
+
+
 
     useEffect(() => {
         api.get(`/api/jobs/${id}`)
@@ -51,7 +50,7 @@ export function JobDetailPage() {
 
     const handleDelete = async () => {
         try {
-            await api.delete(`/api/jobs/delete/${id}/`, { students: selectedStudentsForDrive })
+            await api.delete(`/api/jobs/delete/${id}/`)
             alert("Job post deleted successfully ")
             navigate("/")
 
@@ -60,80 +59,12 @@ export function JobDetailPage() {
         }
     }
 
-    const startEdit = () => {
-        setTitle(jobDetail.title)
-        setCompanyName(jobDetail.company_name)
-        setDescription(jobDetail.description)
-        setSkills(jobDetail.skills_requires)
-        setStipend(jobDetail.stipend)
-        setSalary(jobDetail.salary)
-        setLocation(jobDetail.location)
-        setEditMode(true)
+    const onUpdateSuccess = async()=>{
+        const response = await api.get(`/api/jobs/${id}`)
+        setJobDetail(response.data)
+        setEditMode(false)
     }
 
-    const handleUpdate = async () => {
-        const data = {
-
-            title: title,
-            company_name: companyName,
-            description: description,
-            skills_requires: skills,
-            salary: salary,
-            stipend: stipend,
-            location: location
-        }
-        try {
-            await api.patch(`/api/jobs/update/${id}/`, data)
-            alert("Job post updated successfully")
-
-            const response = await api.get(`/api/jobs/${id}`)
-            setJobDetail(response.data)
-            setEditMode(false)
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const listStudents = async () => {
-        try {
-            await api.get("/api/students/")
-                .then((response) => {
-                    setStudents(response.data)
-                    setAddStudentsMode(true)
-
-                })
-        } catch (error) {
-            console.log(error)
-            alert("Error in Fetching Students")
-        }
-    }
-
-
-    function handleCheckbox(studentId) {
-        if (selectedStudentsForDrive.includes(studentId)) {
-            setSelectedStudentsForDrive(selectedStudentsForDrive.filter(
-                id => id !== studentId
-            ))
-        }
-        else {
-            setSelectedStudentsForDrive([...selectedStudentsForDrive, studentId])
-        }
-    }
-
-    const handleAddStudents = async () => {
-        try {
-
-            await api.post(`/api/application/create/${id}/`, { students: selectedStudentsForDrive })
-            alert("Added Students successfully")
-            setAddStudentsMode(false)
-
-
-        } catch (error) {
-            console.log(error)
-            alert("Error in adding students to the drive ")
-        }
-    }
     const handleStudentsinthisDrive = async () => {
         try {
             const res = await api.get(`/api/application/job/${id}`)
@@ -216,7 +147,7 @@ export function JobDetailPage() {
     }
     const handleShortlistings = async () => {
         try {
-            await api.post(`/api/shortlisted/update/${id}/`, { shortlisted_ids: shorlistedApplications ,roundstatus:"shortlisted"})
+            await api.post(`/api/shortlisted/update/${id}/`, { shortlisted_ids: shorlistedApplications, roundstatus: "shortlisted" })
             alert("Successfully Shortlisted")
         } catch (error) {
             console.log(error.response.data)
@@ -225,219 +156,159 @@ export function JobDetailPage() {
 
 
     }
-    const handleViewshorlisted = async()=>{
-        try{
+    const handleViewshorlisted = async () => {
+        try {
             const res = await api.get(`/api/application/shortlisted/${id}`)
             console.log(res.data)
             setShorlistedStudentsforthisDrive(res.data)
             setViewShortlistedStudentsMode(true)
-        }catch(error){
-            console.log(error)
+        } catch (error) {
+            console.log(error) 
         }
     }
-    const handleSelect = async()=>{
-        try{
-            await api.post(`/api/shortlisted/update/${id}/`,{
-                shortlisted_ids:shorlistedApplications,roundstatus : "selected"
-              
+    const handleSelect = async () => {
+        try {
+            await api.post(`/api/shortlisted/update/${id}/`, {
+                shortlisted_ids: shorlistedApplications, roundstatus: "selected"
+
             })
-              alert("Successuly Selected Students")
-        }catch(error){
+            alert("Successuly Selected Students")
+        } catch (error) {
             console.log(error.response.data)
         }
     }
+
     return (
         <>
-            <>
-                <h1>{jobDetail.title}</h1>
-
-                <p>{jobDetail.company_name}</p>
-
-                <p>{jobDetail.description}</p>
-
-                <p>{jobDetail.skills_requires}</p>
-
-                <p>{jobDetail.stipend}</p>
-
-                <p>{jobDetail.salary}</p>
-
-                <p>{jobDetail.location}</p>
-            </>
+        
+       
+       <Navbar/>
+        <div className="jd-page">
+             
+            
+            {/* ── Job Info Card ── */}
+            <JobInfoCard job={jobDetail}/>
+           
 
             {isAdmin && (
-                <>
-                    <button onClick={handleDelete}>Delete job post </button>
-                    <button onClick={startEdit}>Update Job post </button>
-                    <button onClick={handleRequestedStudents}>Requested Students</button>
+                <div className="jd-admin-section">
+
+                    {/* ── Admin Action Buttons ── */}
+                    <div className="jd-admin-actions">
+                        <button className="jd-btn jd-btn-danger" onClick={handleDelete}>Delete Job Post</button>
+                        <button className="jd-btn jd-btn-secondary" onClick={()=>setEditMode(true)}>Update Job Post</button>
+                        <button className="jd-btn jd-btn-secondary" onClick={handleRequestedStudents}>Requested Students</button>
+                        <button className="jd-btn jd-btn-secondary" onClick={()=>setAddStudentsMode(true)}>Add Students</button>
+                        <button className="jd-btn jd-btn-secondary" onClick={handleStudentsinthisDrive}>Students in this Drive</button>
+                        <button className="jd-btn jd-btn-secondary" onClick={handleShowStudentsforShortlisting}>Shortlist Students</button>
+                    </div>
+
+                    {/* ── Edit Form ── */}
                     {editMode && (
-                        <>
-                            <input
-                                type="text"
-                                placeholder="Job Title"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                placeholder="Company Name"
-                                value={companyName}
-                                onChange={(e) => setCompanyName(e.target.value)}
-                            />
-
-                            <textarea
-                                placeholder="Description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                placeholder="Skills"
-                                value={skills}
-                                onChange={(e) => setSkills(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                placeholder="Stipend"
-                                value={stipend}
-                                onChange={(e) => setStipend(e.target.value)}
-                            />
-                            <input
-                                type="text"
-                                placeholder="Salary"
-                                value={salary}
-                                onChange={(e) => setSalary(e.target.value)}
-                            />
-
-                            <input
-                                type="text"
-                                placeholder="Location"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                            />
-
-                            <button onClick={handleUpdate}>
-                                Save Update
-                            </button>
-                        </>
-
+                       <EditJobForm jobDetail = {jobDetail} jobId={id} onUpdateSuccess = {onUpdateSuccess}/>
                     )}
-                    <button onClick={listStudents}>Add Students </button>
+
+                    {/* ── Add Students Panel ── */}
                     {addStudentsMode && (
-                        <>
-                            {students.map((student) => {
-                                return (
-                                    <div key={student.id}>
-
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedStudentsForDrive.includes(student.id)}
-                                            onChange={() => handleCheckbox(student.id)}
-
-                                        />
-                                        <span> {student.username} </span>
-                                    </div>
-
-                                )
-                            })}
-                            <button onClick={handleAddStudents}>Add selected students </button>
-
-                        </>
-
+                            <AddStudents jobId = {id} onclose = {()=>setAddStudentsMode(false)}/>
                     )}
-                    <button onClick={handleStudentsinthisDrive}>Students in this drive </button>
+
+                    {/* ── Students in Drive ── */}
                     {studentinthisDriveMode && (
-                        <>
-                            {studentsinthisDrive.map((application) => {
-                                return (
-                                    <div key={application.id}>
-                                        <p>{application.student.username}</p>
-                                    </div>
-                                )
-                            })}
-
-                        </>
-                    )}
-
-
-                    {requestedStudentsMode && (
-                        <>
-                            {requestedStudents.map((requestedStudent) => {
-                                return (
-                                    <div key={requestedStudent.id}>
-                                        <input
-                                            type="checkbox"
-                                            checked={requestedSelectedStudentsforDrive.includes(requestedStudent.id)}
-                                            onChange={() =>handlerequestedCheckbox(requestedStudent.id)}
-                                        />
-
-                                        <span>
-                                            {requestedStudent.student.username}
-                                        </span>
-                                    </div>
-                                );
-                            })}
-
-                            <button onClick={handleAddRequestedStudents}>
-                                Add these requested students to the drive
-                            </button>
-                        </>
-                    )}
-
-
-                    <button onClick={handleShowStudentsforShortlisting}> Shortlist Students for the next round </button>
-                    {showStudentsinthisDriveMode && (
-                        <>
-
-                            {studentsinthisDrive.map((application) => {
-                                return (
-                                    <div key={application.id}>
-                                        <input
-                                            type="checkbox"
-                                            checked={shorlistedApplications.includes(application.id)}
-                                            onChange={() => handleShortlistedCheckbox(application.id)}
-
-                                        />
-                                        <span>{application.student.username}</span>
-
-                                    </div>
-                                )
-                            })
-
-                            }
-                            <button onClick={handleShortlistings}> Shortlist Selected </button>
-                            <button onClick = {handleSelect}> Select as Final Students</button>
-                        </>
-                    )}
-                   
-                </>
-
-
-
-            )}
-            <button onClick = {handleViewshorlisted}> View Shortlisted  </button>
-            {viewShorlistedStudentsMode &&(
-                <>
-                
-                   {shorlistedStudentsforthisDrive.map((shortlistedStudent)=>{
-                    return(
-                        <div key = {shortlistedStudent.id}>
-                            <p>{shortlistedStudent.student.username}</p>
-
+                        <div className="jd-panel">
+                            <h3 className="jd-panel-title">Students in This Drive</h3>
+                            <div className="jd-student-list">
+                                {studentsinthisDrive.map((application) => {
+                                    return (
+                                        <div className="jd-student-row jd-student-row--readonly" key={application.id}>
+                                            <p>{application.student.username}</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
-                    )
-                   })} 
-                
-                </>
+                    )}
+
+                    {/* ── Requested Students Panel ── */}
+                    {requestedStudentsMode && (
+                        <div className="jd-panel">
+                            <h3 className="jd-panel-title">Requested Students</h3>
+                            <div className="jd-student-list">
+                                {requestedStudents.map((requestedStudent) => {
+                                    return (
+                                        <label className="jd-student-row" key={requestedStudent.id}>
+                                            <input
+                                                type="checkbox"
+                                                className="jd-checkbox"
+                                                checked={requestedSelectedStudentsforDrive.includes(requestedStudent.id)}
+                                                onChange={() => handlerequestedCheckbox(requestedStudent.id)}
+                                            />
+                                            <span>{requestedStudent.student.username}</span>
+                                        </label>
+                                    );
+                                })}
+                            </div>
+                            <button className="jd-btn jd-btn-primary" onClick={handleAddRequestedStudents}>
+                                Approve Selected Students
+                            </button>
+                        </div>
+                    )}
+
+                    {/* ── Shortlisting Panel ── */}
+                    {showStudentsinthisDriveMode && (
+                        <div className="jd-panel">
+                            <h3 className="jd-panel-title">Shortlist / Select Students</h3>
+                            <div className="jd-student-list">
+                                {studentsinthisDrive.map((application) => {
+                                    return (
+                                        <label className="jd-student-row" key={application.id}>
+                                            <input
+                                                type="checkbox"
+                                                className="jd-checkbox"
+                                                checked={shorlistedApplications.includes(application.id)}
+                                                onChange={() => handleShortlistedCheckbox(application.id)}
+                                            />
+                                            <span>{application.student.username}</span>
+                                        </label>
+                                    )
+                                })}
+                            </div>
+                            <div className="jd-panel-actions">
+                                <button className="jd-btn jd-btn-primary" onClick={handleShortlistings}>Shortlist Selected</button>
+                                <button className="jd-btn jd-btn-success" onClick={handleSelect}>Select as Final</button>
+                            </div>
+                        </div>
+                    )}
+
+                </div>
             )}
+
+            {/* ── View Shortlisted (visible to all) ── */}
+            <div className="jd-shortlisted-section">
+                <button className="jd-btn jd-btn-secondary" onClick={handleViewshorlisted}>View Shortlisted</button>
+                {viewShorlistedStudentsMode && (
+                    <div className="jd-panel">
+                        <h3 className="jd-panel-title">Shortlisted Students</h3>
+                        <div className="jd-student-list">
+                            {shorlistedStudentsforthisDrive.map((shortlistedStudent) => {
+                                return (
+                                    <div className="jd-student-row jd-student-row--readonly" key={shortlistedStudent.id}>
+                                        <p>{shortlistedStudent.student.username}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                )}
+            </div>
 
             {!isAdmin && (
-                <>
-                    <button onClick={handleRequest}> Request for this Drive </button>
-                </>
+                <div className="jd-student-cta">
+                    <button className="jd-btn jd-btn-primary" onClick={handleRequest}>Request for this Drive</button>
+                </div>
             )}
-        </>
+
+        </div>
+    </>
     )
 }

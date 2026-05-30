@@ -1,0 +1,266 @@
+/* ============================================================
+   JobDetailPage.css
+   Basic, clean CSS — no frills, just readable and organized
+   ============================================================ */
+
+/* ── Page wrapper ── */
+.jd-page {
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 20px 60px;
+  font-family: 'Inter', sans-serif;
+  color: #0F172A;
+}
+
+/* ── Job Info Card ── */
+.jd-info-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.jd-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 6px;
+}
+
+.jd-company {
+  font-size: 16px;
+  font-weight: 600;
+  color: #7C3AED;
+  margin: 0 0 16px;
+}
+
+.jd-description {
+  font-size: 15px;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.jd-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.jd-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.jd-meta-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94A3B8;
+}
+
+.jd-meta-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1E293B;
+}
+
+/* ── Admin Section ── */
+.jd-admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Admin Action Button Row ── */
+.jd-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ── Panels (edit form, student lists, etc.) ── */
+.jd-panel {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.jd-panel-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1E293B;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.jd-panel-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ── Form Grid ── */
+.jd-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* ── Input / Textarea ── */
+.jd-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #0F172A;
+  background: #F8FAFC;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.jd-input:focus {
+  border-color: #7C3AED;
+  background: #fff;
+}
+
+.jd-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ── Student List ── */
+.jd-student-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.jd-student-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background: #F8FAFC;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.jd-student-row:hover {
+  background: #EEF2FF;
+}
+
+.jd-student-row--readonly {
+  cursor: default;
+}
+
+.jd-student-row--readonly:hover {
+  background: #F8FAFC;
+}
+
+.jd-student-row p {
+  margin: 0;
+}
+
+.jd-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #7C3AED;
+  flex-shrink: 0;
+}
+
+/* ── Shortlisted section ── */
+.jd-shortlisted-section {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Student CTA (Request button) ── */
+.jd-student-cta {
+  margin-top: 28px;
+}
+
+/* ── Buttons ── */
+.jd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.jd-btn:hover {
+  transform: translateY(-1px);
+}
+
+.jd-btn:active {
+  transform: translateY(0);
+}
+
+/* Primary — purple */
+.jd-btn-primary {
+  background: #7C3AED;
+  color: #ffffff;
+}
+
+.jd-btn-primary:hover {
+  background: #6D28D9;
+}
+
+/* Secondary — outlined */
+.jd-btn-secondary {
+  background: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+}
+
+.jd-btn-secondary:hover {
+  background: #E8EFFE;
+  border-color: #A78BFA;
+  color: #5B21B6;
+}
+
+/* Success — green */
+.jd-btn-success {
+  background: #16A34A;
+  color: #ffffff;
+}
+
+.jd-btn-success:hover {
+  background: #15803D;
+}
+
+/* Danger — red */
+.jd-btn-danger {
+  background: #DC2626;
+  color: #ffffff;
+}
+
+.jd-btn-danger:hover {
+  background: #B91C1C;
+}

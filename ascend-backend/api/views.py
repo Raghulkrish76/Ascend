@@ -10,6 +10,7 @@ from .permissions import IsAdmin
 from .serializers import AscendTokenSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import StudentProfileSerializer
+from .filters import StudentProfileFilter
 
 class AscendTokenView(TokenObtainPairView):
     serializer_class = AscendTokenSerializer
@@ -50,12 +51,14 @@ class JobDeleteView(generics.DestroyAPIView):
     
 
 class StudentsList(generics.ListAPIView):
-    serializer_class = UserSerializer
+    serializer_class = StudentProfileSerializer
     permission_classes = [IsAdmin]
     def get_queryset(self):
-         return User.objects.filter(role = "user")
-    
-
+        profiles = StudentProfileFilter(
+            self.request.GET,
+            queryset=StudentProfile.objects.all()
+        ).qs
+        return profiles
 
 class CreateApplicationView(APIView):
     serializer_class = ApplicationSerializer
@@ -97,10 +100,6 @@ class CreateRequestedApplicationView(APIView):
                 }
             )
         return Response({"Student Requested "})
-
-
-
-
 
 
 class JobApplicationView(APIView):
@@ -188,7 +187,7 @@ class UpdateShortlistedStudents(APIView):
         return Response({"message":"Students Shortlisted"})   
 
 class ViewShortlisted(APIView):
-    permission_classes = [IsAdmin]
+    permission_classes = [IsAuthenticated]
 
     def get(self,request,job_id):
         applications = Application.objects.filter(job=job_id,roundstatus = "shortlisted")

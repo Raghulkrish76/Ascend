@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 
     'rest_framework',
     'corsheaders',
@@ -50,6 +51,9 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
+    'DEFAULT_FILTER_BACKENDS': 
+    ['django_filters.rest_framework.DjangoFilterBackend'],
+
 }
 
 TEMPLATES = [
