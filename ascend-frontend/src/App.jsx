@@ -8,6 +8,7 @@ import { JobDetailPage } from "./pages/JobDetailPage"
 import { CreateStudentProfile } from "./pages/CreateStudentProfile"
 import { Profile } from "./pages/Profile"
 import { MyDrives } from "./pages/MyDrives"
+import { AdminDashboard } from "./pages/AdminDashboard"
 function App() {
   return (
     <>
@@ -61,6 +62,14 @@ function App() {
           }
           />
 
+          <Route
+          path = "admin/dashboard"
+          element = {
+            <ProtectedRoute>
+            <AdminDashboard/>
+            </ProtectedRoute>
+          }
+          />
 
 
         </Routes>

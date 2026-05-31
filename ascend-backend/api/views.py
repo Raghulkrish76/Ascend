@@ -209,4 +209,21 @@ class MyDrivesView(generics.ListAPIView):
     def get_queryset(self):
         return Application.objects.filter(student=self.request.user)
     
+class AdminDashboardView(APIView):
+    permission_classes = [IsAdmin]
+    def get(self,request):
+        total_students = StudentProfile.objects.all().count()
+        total_drives = Job.objects.all().count()
+        total_mydrives = Job.objects.filter(posted_by=request.user).count()
+        my_drives = Job.objects.filter(posted_by=request.user)
+        serializer = JobSerializer(my_drives,many=True)
+
+        return Response({
+            "total_students":total_students,
+             "total_drives":total_drives,
+             "total_mydrives":total_mydrives,
+             "my_drives":serializer.data,
+        })
+
+    
 

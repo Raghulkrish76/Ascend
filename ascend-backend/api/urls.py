@@ -8,6 +8,7 @@ from .views import CreateRequestedApplicationView
 from .views import RequestedStudentsView,UpdateApplicationforRequestedStudents
 from .views import UpdateShortlistedStudents,ViewShortlisted
 from .views import StudentDetailsView,MyDrivesView
+from .views import AdminDashboardView
 urlpatterns=[
 
     path('jobs/',JobListView.as_view(),name = "job-list"),
@@ -27,4 +28,5 @@ urlpatterns=[
     path("shortlisted/update/<int:job_id>/",UpdateShortlistedStudents.as_view(),name = "update-shortlistedStudents"),
     path('application/shortlisted/<int:job_id>',ViewShortlisted.as_view(),name = "View-shortlisted"),
     path('mydrives/',MyDrivesView.as_view(),name = "My-Drives"),
+    path('admin/dashboard/',AdminDashboardView.as_view(),name = "Admin-Dashboard"),
 ]

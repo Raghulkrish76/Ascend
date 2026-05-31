@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
-
+import useAuth from "../hooks/useAuth"
 export function Navbar() {
-
+    const {username} = useAuth()
+    const {role} = useAuth()
+    const {isAdmin} = useAuth()
     const navStyle = {
         display: "flex",
         justifyContent: "space-between",
@@ -54,18 +56,31 @@ export function Navbar() {
                             Home
                         </Link>
                     </li>
-
-                    <li>
+                    {!isAdmin && (
+                        <>
+                        <li>
                         <Link style={linkStyle} to="/mydrives">
                             My Drives
                         </Link>
                     </li>
-
                     <li>
                         <Link style={linkStyle} to="/profile">
                             Profile
                         </Link>
                     </li>
+                    </>
+                    )}
+                    {isAdmin &&(
+                        <>
+                           <li>
+                        <Link style={linkStyle} to="/admin/dashboard">
+                            Dashboard
+                        </Link>
+                    </li>
+                        </>
+                    )}
+
+                    
 
                     <li onClick = {handleLogout}>
                         
@@ -73,6 +88,13 @@ export function Navbar() {
                             Logout
                         </Link>
                     </li>
+                    
+                    <li>
+                       
+                            <p>{username}|</p>
+                            {role}
+                    </li>
+
 
                 </ul>
 

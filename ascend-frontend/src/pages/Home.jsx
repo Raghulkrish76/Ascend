@@ -1,9 +1,9 @@
 import { useEffect,useState } from "react"
-import api from "../api"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-import useAuth from "../hooks/useAuth"
 import { Navbar } from "../components/Navbar"
+import api from "../api"
+import useAuth from "../hooks/useAuth"
 export function Home(){
 
     const [jobs,setJobs] = useState([])
@@ -24,6 +24,7 @@ export function Home(){
     },[])
     return(
         <>
+        <title> Ascend - Home </title>
         <Navbar/>
          <p> THIS IS HOME PAGE !! fg</p>
           
