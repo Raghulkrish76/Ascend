@@ -1,0 +1,169 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Page wrapper */
+.mydrives-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  font-family: 'Inter', sans-serif;
+  color: #0F172A;
+}
+
+/* Page heading */
+.mydrives-heading {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.mydrives-subheading {
+  font-size: 0.9rem;
+  color: #64748B;
+  margin-bottom: 32px;
+}
+
+/* Empty state */
+.mydrives-empty {
+  text-align: center;
+  color: #64748B;
+  padding: 60px 0;
+  font-size: 1rem;
+}
+
+/* Cards list */
+.mydrives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Drive card */
+.mydrive-card {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.mydrive-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 36px rgba(124, 58, 237, 0.16);
+  border-color: #C4B5FD;
+}
+
+/* Company letter avatar */
+.mydrive-avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background-color: #EDE9FE;
+  color: #7C3AED;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #C4B5FD;
+}
+
+/* Card body */
+.mydrive-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Job title link */
+.mydrive-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0F172A;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mydrive-title:hover {
+  color: #7C3AED;
+}
+
+/* Description */
+.mydrive-desc {
+  font-size: 0.875rem;
+  color: #64748B;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Meta row */
+.mydrive-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid #E2E8F0;
+  padding-top: 12px;
+  margin-top: 4px;
+  gap: 0;
+}
+
+.mydrive-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 16px;
+}
+
+.mydrive-meta-item:first-child {
+  padding-left: 0;
+}
+
+.mydrive-meta-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mydrive-meta-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.mydrive-meta-divider {
+  width: 1px;
+  height: 30px;
+  background-color: #E2E8F0;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mydrive-card {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .mydrive-meta-divider {
+    display: none;
+  }
+
+  .mydrive-meta-item {
+    padding: 0;
+  }
+}

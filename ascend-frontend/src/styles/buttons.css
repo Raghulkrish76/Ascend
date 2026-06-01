@@ -1,0 +1,69 @@
+
+
+/* Base button */
+.ascend-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.ascend-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Primary — purple */
+.ascend-btn-primary {
+  background-color: #7C3AED;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.25);
+}
+
+.ascend-btn-primary:hover {
+  background-color: #5B21B6;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+}
+
+/* Secondary — light  */
+.ascend-btn-secondary {
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+}
+
+.ascend-btn-secondary:hover {
+  background-color: #E8EFFE;
+  border-color: #A78BFA;
+  color: #5B21B6;
+}
+
+/* Danger — red */
+.ascend-btn-danger {
+  background-color: #DC2626;
+  color: #ffffff;
+}
+
+.ascend-btn-danger:hover {
+  background-color: #B91C1C;
+}
+
+/* Outline — transparent with purple border */
+.ascend-btn-outline {
+  background-color: transparent;
+  color: #7C3AED;
+  border: 1.5px solid #7C3AED;
+}
+
+.ascend-btn-outline:hover {
+  background-color: #EDE9FE;
+}

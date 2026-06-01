@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* ── CSS VARIABLES ── */
+:root {
+    --purple:        #7C3AED;
+    --purple-dark:   #5B21B6;
+    --purple-light:  #A78BFA;
+    --purple-accent: #C4B5FD;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* No margin so it stretches full width, no white gaps */
+    margin: 0;
+    padding: 14px 32px;
+
+    background: linear-gradient(135deg, #5B21B6, #7C3AED);
+    color: white;
+
+    /* Soft shadow below the bar */
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.3);
+}
+
+/* ── LOGO ── */
+.navbar-logo {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.5px;
+    user-select: none;
+}
+
+/* ── LINKS LIST ── */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── EACH NAV ITEM ── */
+.navbar-item {
+    list-style: none;
+}
+
+/* ── NAV LINK ── */
+.navbar-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 7px 14px;
+    border-radius: 8px;
+    display: inline-block;
+
+    /* Smooth hover animation */
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+/* ── NAV LINK HOVER ── */
+.navbar-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ── LOGOUT LINK ── */
+.navbar-link--logout {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-link--logout:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    transform: translateY(-2px);
+}
+
+/* ── USER BADGE (pill at the end) ── */
+.navbar-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(196, 181, 253, 0.35);
+    border-radius: 50px;
+    padding: 5px 12px;
+    margin-left: 8px;
+    list-style: none;
+}
+
+.navbar-username {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.navbar-role-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--purple-accent);
+    background: rgba(167, 139, 250, 0.2);
+    border: 1px solid rgba(167, 139, 250, 0.4);
+    border-radius: 20px;
+    padding: 2px 8px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .navbar-logo {
+        font-size: 20px;
+    }
+
+    .navbar-link {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}

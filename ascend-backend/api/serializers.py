@@ -33,7 +33,7 @@ class AscendTokenSerializer(TokenObtainPairSerializer):
         return token
 
 class JobSerializer(serializers.ModelSerializer):
-    
+    posted_by = UserSerializer(read_only=True)
     class Meta:
         model = Job 
         fields = '__all__'

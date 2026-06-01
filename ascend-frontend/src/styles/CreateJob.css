@@ -1,0 +1,118 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Page wrapper */
+.cj-wrapper {
+  min-height: 100vh;
+  background-color: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 80px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* White card */
+.cj-card {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.08);
+  padding: 36px 40px;
+  width: 100%;
+  max-width: 560px;
+}
+
+/* Heading */
+.cj-heading {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+
+.cj-subheading {
+  font-size: 0.9rem;
+  color: #64748B;
+  margin-bottom: 28px;
+}
+
+/* Field wrapper */
+.cj-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+/* Input */
+.cj-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #0F172A;
+  background-color: #F8FAFC;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.cj-input:focus {
+  border-color: #7C3AED;
+  background-color: #ffffff;
+}
+
+/* Textarea */
+.cj-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #0F172A;
+  background-color: #F8FAFC;
+  outline: none;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.cj-textarea:focus {
+  border-color: #7C3AED;
+  background-color: #ffffff;
+}
+
+/* Submit */
+.cj-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #7C3AED;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.cj-submit-btn:hover {
+  background-color: #5B21B6;
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .cj-card {
+    padding: 24px 20px;
+  }
+}

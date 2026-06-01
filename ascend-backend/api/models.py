@@ -8,6 +8,7 @@ class User(AbstractUser):
         return self.username
 
 class Job(models.Model):
+    
     title = models.CharField(max_length=255)
     company_name = models.CharField(max_length=100)
     description = models.TextField()

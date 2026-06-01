@@ -1,100 +1,68 @@
 import { Link } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
+import "../styles/Navbar.css"
+
 export function Navbar() {
-    const {username} = useAuth()
-    const {role} = useAuth()
-    const {isAdmin} = useAuth()
-    const navStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "18px 40px",
-        backgroundColor: "#4700c3",
-        color: "white",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
-    }
+    const { username } = useAuth()
+    const { role } = useAuth()
+    const { isAdmin } = useAuth()
 
-    const logoStyle = {
-        fontSize: "28px",
-        fontWeight: "bold",
-        fontFamily: "Exo 2"
-    }
-
-    const ulStyle = {
-        display: "flex",
-        alignItems: "center",
-        gap: "25px",
-        listStyle: "none",
-        margin: 0,
-        padding: 0
-    }
-
-    const linkStyle = {
-        textDecoration: "none",
-        color: "white",
-        fontSize: "16px",
-        fontWeight: "500",
-        transition: "0.3s"
-    }
-    const handleLogout = ()=>{
+    const handleLogout = () => {
         localStorage.clear()
         window.location.href = "/login";
     }
 
     return (
         <>
-            <nav style={navStyle}>
+            <nav className="navbar">
 
-                <div style={logoStyle}>
+                <div className="navbar-logo">
                     Ascend
                 </div>
 
-                <ul style={ulStyle}>
+                <ul className="navbar-links">
 
-                    <li>
-                        <Link style={linkStyle} to="/">
+                    <li className="navbar-item">
+                        <Link className="navbar-link" to="/">
                             Home
                         </Link>
                     </li>
+
                     {!isAdmin && (
                         <>
-                        <li>
-                        <Link style={linkStyle} to="/mydrives">
-                            My Drives
-                        </Link>
-                    </li>
-                    <li>
-                        <Link style={linkStyle} to="/profile">
-                            Profile
-                        </Link>
-                    </li>
-                    </>
-                    )}
-                    {isAdmin &&(
-                        <>
-                           <li>
-                        <Link style={linkStyle} to="/admin/dashboard">
-                            Dashboard
-                        </Link>
-                    </li>
+                            <li className="navbar-item">
+                                <Link className="navbar-link" to="/mydrives">
+                                    My Drives
+                                </Link>
+                            </li>
+                            <li className="navbar-item">
+                                <Link className="navbar-link" to="/profile">
+                                    Profile
+                                </Link>
+                            </li>
                         </>
                     )}
 
-                    
+                    {isAdmin && (
+                        <>
+                            <li className="navbar-item">
+                                <Link className="navbar-link" to="/admin/dashboard">
+                                    Dashboard
+                                </Link>
+                            </li>
+                        </>
+                    )}
 
-                    <li onClick = {handleLogout}>
-                        
-                        <Link style={linkStyle} to="/logout">
+                    <li className="navbar-item" onClick={handleLogout}>
+                        <Link className="navbar-link navbar-link--logout" to="/logout">
                             Logout
                         </Link>
                     </li>
-                    
-                    <li>
-                       
-                            <p>{username}|</p>
-                            {role}
-                    </li>
 
+                    <li className="navbar-user-badge">
+                        <span className="navbar-username">{username}</span>
+                        <span className="navbar-role-tag">{role}</span>
+                    </li>
 
                 </ul>
 

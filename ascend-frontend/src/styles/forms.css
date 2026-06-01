@@ -1,0 +1,107 @@
+
+
+/* Form group wrapper */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+/* Label */
+.form-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+/* Input */
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #0F172A;
+  background-color: #F8FAFC;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: #7C3AED;
+  background-color: #ffffff;
+}
+
+/* Textarea */
+.form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #0F172A;
+  background-color: #F8FAFC;
+  outline: none;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-textarea:focus {
+  border-color: #7C3AED;
+  background-color: #ffffff;
+}
+
+/* Select */
+.form-select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #0F172A;
+  background-color: #F8FAFC;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.form-select:focus {
+  border-color: #7C3AED;
+  background-color: #ffffff;
+}
+
+/* Submit button inside a form */
+.form-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #7C3AED;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.form-submit-btn:hover {
+  background-color: #5B21B6;
+  transform: translateY(-1px);
+}
+
+.form-submit-btn:disabled {
+  background-color: #A78BFA;
+  cursor: not-allowed;
+  transform: none;
+}

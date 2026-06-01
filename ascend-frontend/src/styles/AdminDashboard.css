@@ -1,0 +1,219 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Page wrapper */
+.admin-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  font-family: 'Inter', sans-serif;
+  color: #0F172A;
+}
+
+/* Page heading */
+.admin-heading {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.admin-subheading {
+  font-size: 0.95rem;
+  color: #64748B;
+  margin-bottom: 36px;
+}
+
+/* ── Statistics Row ── */
+.admin-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+/* Individual stat card */
+.admin-stat-card {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-top: 4px solid #7C3AED;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.08);
+  padding: 20px 28px;
+  text-align: center;
+  flex: 1;
+  min-width: 160px;
+}
+
+.admin-stat-count {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #7C3AED;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.admin-stat-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── My Drives Section ── */
+.admin-section-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+}
+
+/* Job cards list */
+.admin-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Job card — same as home page style */
+.admin-job-card {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.admin-job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 36px rgba(124, 58, 237, 0.16);
+  border-color: #C4B5FD;
+}
+
+/* Company letter avatar */
+.admin-job-avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background-color: #EDE9FE;
+  color: #7C3AED;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #C4B5FD;
+}
+
+/* Card body */
+.admin-job-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-job-title {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0F172A;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.admin-job-title:hover {
+  color: #7C3AED;
+}
+
+.admin-job-company {
+  font-size: 0.88rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.admin-job-desc {
+  font-size: 0.875rem;
+  color: #64748B;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Meta row — stipend / salary / location */
+.admin-job-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid #E2E8F0;
+  padding-top: 12px;
+  margin-top: 4px;
+  gap: 0;
+}
+
+.admin-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 16px;
+}
+
+.admin-meta-item:first-child {
+  padding-left: 0;
+}
+
+.admin-meta-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-meta-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.admin-meta-divider {
+  width: 1px;
+  height: 30px;
+  background-color: #E2E8F0;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-stats-row {
+    flex-direction: column;
+  }
+
+  .admin-job-card {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .admin-meta-divider {
+    display: none;
+  }
+
+  .admin-meta-item {
+    padding: 0;
+  }
+}
