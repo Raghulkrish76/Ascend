@@ -514,7 +514,7 @@
 }
 
 .jd-btn-success {
-  background: #16A34A;
+  background: #5B21B6;
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
 }
@@ -525,17 +525,22 @@
 }
 
 .jd-btn-danger {
-  background: #DC2626;
+  background: #5B21B6;
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
 }
+
 
 .jd-btn-danger:hover {
   background: #B91C1C;
   box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
 }
 
-
+.jd-form-actions {
+  display: flex;
+  gap: 12px; /* Controls the space between the Save and Cancel buttons */
+  margin-top: 16px;
+}
 
 @media (max-width: 900px) {
   .jd-meta-grid {

@@ -200,7 +200,7 @@ export function JobDetailPage() {
 
                         {/* Edit Form */}
                         {editMode && (
-                            <EditJobForm jobDetail={jobDetail} jobId={id} onUpdateSuccess={onUpdateSuccess} />
+                            <EditJobForm jobDetail={jobDetail} jobId={id} onUpdateSuccess={onUpdateSuccess} onClose = {()=>setEditMode(false)}/>
                         )}
 
                         {/* Add Students Panel */}

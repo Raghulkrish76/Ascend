@@ -1,7 +1,4 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
-
 
 /* ─── Color & Style Variables ────────────────────────────── */
 :root {
@@ -361,7 +358,6 @@ body {
     align-self: flex-start;
   }
 }
-
 
 /* ─── Responsive — Mobile (≤ 480px) ─────────────────────── */
 @media (max-width: 480px) {

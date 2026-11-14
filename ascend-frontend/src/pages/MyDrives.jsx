@@ -52,7 +52,7 @@ export function MyDrives() {
                                 {/* Meta row */}
                                 <div className="mydrive-meta-row">
                                     <div className="mydrive-meta-item">
-                                        <span className="mydrive-meta-label">Stipend</span>
+                                        <span className="mydrive-meta-label">Stipend bro </span>
                                         <span className="mydrive-meta-value">{mydrive.job.stipend}</span>
                                     </div>
                                     <div className="mydrive-meta-divider"></div>

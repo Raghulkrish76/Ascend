@@ -27,7 +27,7 @@ export function JobInfoCard({ job }) {
         <div className="jd-meta-grid">
 
           <div className="jd-meta-tile">
-            <span className="jd-meta-tile__icon">💰</span>
+            <span className="jd-meta-tile__icon"></span>
             <div className="jd-meta-tile__body">
               <span className="jd-meta-tile__label">Stipend</span>
               <span className="jd-meta-tile__value">
@@ -37,7 +37,7 @@ export function JobInfoCard({ job }) {
           </div>
 
           <div className="jd-meta-tile">
-            <span className="jd-meta-tile__icon">💼</span>
+            <span className="jd-meta-tile__icon"></span>
             <div className="jd-meta-tile__body">
               <span className="jd-meta-tile__label">Salary</span>
               <span className="jd-meta-tile__value">
@@ -47,7 +47,7 @@ export function JobInfoCard({ job }) {
           </div>
 
           <div className="jd-meta-tile">
-            <span className="jd-meta-tile__icon">📍</span>
+            <span className="jd-meta-tile__icon"></span>
             <div className="jd-meta-tile__body">
               <span className="jd-meta-tile__label">Location</span>
               <span className="jd-meta-tile__value">

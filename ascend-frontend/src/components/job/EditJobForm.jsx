@@ -1,9 +1,9 @@
 import api from "../../api"
 import { useState } from "react"
 
-export function EditJobForm({jobDetail,jobId,onUpdateSuccess}) {
+export function EditJobForm({ jobDetail, jobId, onUpdateSuccess, onClose }) {
 
-   
+
     const [title, setTitle] = useState(jobDetail.title)
     const [companyName, setCompanyName] = useState(jobDetail.company_name)
     const [description, setDescription] = useState(jobDetail.description)
@@ -28,7 +28,7 @@ export function EditJobForm({jobDetail,jobId,onUpdateSuccess}) {
             await api.patch(`/api/jobs/update/${jobId}/`, data)
             alert("Job post updated successfully")
             onUpdateSuccess()
-           
+
 
         } catch (error) {
             console.log(error)
@@ -41,8 +41,8 @@ export function EditJobForm({jobDetail,jobId,onUpdateSuccess}) {
             <div className="jd-panel">
                 <h3 className="jd-panel-title">Edit Job Details</h3>
                 <div className="jd-form-grid">
-                    <input 
-                    className="jd-input" type="text" placeholder="Job Title"
+                    <input
+                        className="jd-input" type="text" placeholder="Job Title"
                         value={title} onChange={(e) => setTitle(e.target.value)} />
                     <input className="jd-input" type="text" placeholder="Company Name"
                         value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
@@ -57,9 +57,14 @@ export function EditJobForm({jobDetail,jobId,onUpdateSuccess}) {
                     <input className="jd-input" type="text" placeholder="Location"
                         value={location} onChange={(e) => setLocation(e.target.value)} />
                 </div>
-                <button className="jd-btn jd-btn-primary" onClick={handleUpdate}>
-                    Save Update
-                </button>
+                <div className="jd-form-actions">
+                    <button className="jd-btn jd-btn-primary" onClick={handleUpdate}>
+                        Save Update
+                    </button>
+                    <button className="jd-btn jd-btn-secondary" onClick={() => onClose && onClose()}>
+                        Cancel
+                    </button>
+                </div>
             </div>
 
         </>

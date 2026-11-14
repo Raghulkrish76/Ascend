@@ -5,7 +5,6 @@ export function Register(){
         <>
         <title>Ascend | Register </title>
         <Form  route = "/api/auth/register/" method = "register"/>
-        
         </>
     )
 }

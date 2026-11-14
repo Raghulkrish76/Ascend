@@ -3,6 +3,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
 import "../styles/Login.css"
+import { Link } from "react-router-dom"
 
 
 
@@ -99,6 +100,11 @@ export function Form({ route, method }) {
                         >
                             {loading ? 'Loading...' : (isLogin ? 'Login' : 'Register')}
                         </button>
+                        <br/>
+                        <br/>
+                        <p className="auth-form-subtitle">
+                        {isLogin ? <> Haven't Registered Yet ? <Link to = "/register/">Register Here  </Link> </> : <> Already Have account <Link to = "/login/">Login Here </Link> </> }
+                        </p>
                     </form>
                 </div>
             </div>

@@ -56,3 +56,4 @@ class StudentProfileSerializer(serializers.ModelSerializer):
     
     def __str__(self):
         return self.username
+    
