@@ -30,7 +30,7 @@ class CreateJobView(generics.CreateAPIView):
         serializer.save(posted_by = self.request.user)
 
 class JobListView(generics.ListAPIView):
-    queryset = Job.objects.all()
+    queryset = Job.objects.all().order_by("-created_at")
     serializer_class = JobSerializer
     permission_classes = [AllowAny]
 

@@ -14,7 +14,7 @@ export function Home() {
   useEffect(() => {
     api.get("/api/jobs/")
       .then((response) => {
-        console.log(response.data)
+        console.log([response.data,...jobs])
         setJobs(response.data)
       })
       .catch((error) => {
@@ -22,7 +22,7 @@ export function Home() {
       })
   }, [])
 
-  return (
+  return ( 
     <>
       <title>Ascend | Home</title>
       <Navbar />

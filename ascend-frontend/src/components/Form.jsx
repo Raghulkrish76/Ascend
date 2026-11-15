@@ -4,7 +4,7 @@ import api from "../api"
 import { useNavigate } from "react-router-dom"
 import "../styles/Login.css"
 import { Link } from "react-router-dom"
-
+import toast from "react-hot-toast"
 
 
 export function Form({ route, method }) {
@@ -37,8 +37,12 @@ export function Form({ route, method }) {
                 navigate("/login")
             }
         } catch (error) {
-            alert(error.response.data)
-            alert(JSON.stringify(error.response.data))
+            if (error.response?.status === 401){
+                toast.error("Wrong Username or passowrd")
+            }
+            else{
+                toast.error("Something went wrong")
+            }
         } finally {
             setLoading(false)
         }

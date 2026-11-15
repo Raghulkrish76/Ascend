@@ -9,9 +9,21 @@ import { CreateStudentProfile } from "./pages/CreateStudentProfile"
 import { Profile } from "./pages/Profile"
 import { MyDrives } from "./pages/MyDrives"
 import { AdminDashboard } from "./pages/AdminDashboard"
+import { Toaster } from "react-hot-toast"
 function App() {
   return (
     <>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            borderRadius: "12px",
+            color: "#0F172A",
+            boxShadow: "0 10px 30px rgba(124, 58, 237, 0.15)",
+            fontFamily: "Inter, sans-serif",
+          },
+        }}
+      />
       <BrowserRouter>
         <Routes>
 
@@ -43,7 +55,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
+
           <Route
             path="profile/"
             element={
@@ -54,21 +66,21 @@ function App() {
           />
 
           <Route
-          path = "mydrives/"
-          element = {
-            <ProtectedRoute>
-            <MyDrives/>
-            </ProtectedRoute>
-          }
+            path="mydrives/"
+            element={
+              <ProtectedRoute>
+                <MyDrives />
+              </ProtectedRoute>
+            }
           />
 
           <Route
-          path = "admin/dashboard"
-          element = {
-            <ProtectedRoute>
-            <AdminDashboard/>
-            </ProtectedRoute>
-          }
+            path="admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
           />
 
 
