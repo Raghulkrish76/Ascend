@@ -7,7 +7,10 @@ export function Navbar() {
     const { role } = useAuth()
     const { isAdmin } = useAuth()
 
-    const handleLogout = () => {
+    const handleLogout = (e) => {
+        e.preventDefault()
+        const confirmed = window.confirm("Are you sure you want to logout ?")
+        if(!confirmed) return
         localStorage.clear()
         window.location.href = "/login";
     }
@@ -54,7 +57,7 @@ export function Navbar() {
                     )}
 
                     <li className="navbar-item" onClick={handleLogout}>
-                        <Link className="navbar-link navbar-link--logout" to="/logout">
+                        <Link className="navbar-link navbar-link--logout">
                             Logout
                         </Link>
                     </li>
