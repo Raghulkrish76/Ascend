@@ -16,16 +16,13 @@ export function JobDetailPage() {
     const { isAdmin } = useAuth()
     const navigate = useNavigate()
 
-    const [addStudentsMode, setAddStudentsMode] = useState(false)
+    const [activePanel,setActivePanel] = useState(null)
 
     const [studentsinthisDrive, setStudentsinthisDrive] = useState([])
-    const [studentinthisDriveMode, setStudentsinthisDriveMode] = useState(false)
 
     const [requestedStudents, setRequestedStudents] = useState([])
-    const [requestedStudentsMode, setRequestedStudentsMode] = useState(false)
     const [requestedSelectedStudentsforDrive, setRequestedSelectedStudentsforDrive] = useState([])
 
-    const [showStudentsinthisDriveMode, setshowStudentsinthisDriveMode] = useState(false)
     const [shorlistedApplications, setShortlistedApplications] = useState([])
 
     const [shorlistedStudentsforthisDrive, setShorlistedStudentsforthisDrive] = useState([])
@@ -41,8 +38,13 @@ export function JobDetailPage() {
 
     const handleDelete = async () => {
         try {
-            await api.delete(`/api/jobs/delete/${id}/`)
-            alert("Job post deleted successfully")
+            if(window.confirm("Are you sure you want delete the job posts")) 
+                {
+                     await api.delete(`/api/jobs/delete/${id}/`)
+                }
+            else{
+                return 
+            }
             navigate("/")
         } catch (error) {
             console.log(error)
@@ -59,7 +61,7 @@ export function JobDetailPage() {
         try {
             const res = await api.get(`/api/application/job/${id}`)
             setStudentsinthisDrive(res.data)
-            setStudentsinthisDriveMode(true)
+            setActivePanel("drivestudents")
         } catch (error) {
             console.log(error)
         }
@@ -78,7 +80,7 @@ export function JobDetailPage() {
         try {
             const res = await api.get(`/api/application/requested/${id}`)
             setRequestedStudents(res.data)
-            setRequestedStudentsMode(true)
+            setActivePanel("requested")
         } catch (error) {
             console.log(error)
         }
@@ -111,7 +113,7 @@ export function JobDetailPage() {
     const handleShowStudentsforShortlisting = async () => {
         const res = await api.get(`/api/application/job/${id}`)
         setStudentsinthisDrive(res.data)
-        setshowStudentsinthisDriveMode(true)
+        setActivePanel("shortlist")
     }
 
     function handleShortlistedCheckbox(applicationId) {
@@ -177,7 +179,7 @@ export function JobDetailPage() {
                             <button className="jd-btn jd-btn-success" onClick={() => setEditMode(true)}>
                                 Update Job Post
                             </button>
-                            <button className="jd-btn jd-btn-danger" onClick={handleDelete}>
+                            <button className="jd-btn jd-btn-danger" onClick={handleDelete} >
                                 Delete Job Post
                             </button>
                         </div>
@@ -187,7 +189,7 @@ export function JobDetailPage() {
                             <button className="jd-btn jd-btn-secondary" onClick={handleRequestedStudents}>
                                 Requested Students
                             </button>
-                            <button className="jd-btn jd-btn-secondary" onClick={() => setAddStudentsMode(true)}>
+                            <button className="jd-btn jd-btn-secondary" onClick={() => setActivePanel("add")}>
                                 Add Students
                             </button>
                             <button className="jd-btn jd-btn-secondary" onClick={handleStudentsinthisDrive}>
@@ -204,12 +206,12 @@ export function JobDetailPage() {
                         )}
 
                         {/* Add Students Panel */}
-                        {addStudentsMode && (
-                            <AddStudents jobId={id} onClose={() => setAddStudentsMode(false)}/>
+                        {activePanel === "add" && (
+                            <AddStudents jobId={id} onClose={() => setActivePanel(null)}/>
                         )}
 
                         {/* Students in Drive panel */}
-                        {studentinthisDriveMode && (
+                        {activePanel === 'drive' && (
                             <div className="jd-panel">
                                 <h3 className="jd-panel-title">Students in This Drive</h3>
                                 <div className="jd-student-list">
@@ -223,7 +225,7 @@ export function JobDetailPage() {
                         )}
 
                         {/* Requested Students Panel */}
-                        {requestedStudentsMode && (
+                        {activePanel === 'requested' && (
                             <div className="jd-panel">
                                 <h3 className="jd-panel-title">Requested Students</h3>
                                 <div className="jd-student-list">
@@ -246,7 +248,7 @@ export function JobDetailPage() {
                         )}
 
                         {/* Shortlisting Panel */}
-                        {showStudentsinthisDriveMode && (
+                        {activePanel === 'shortlist' && (
                             <div className="jd-panel">
                                 <h3 className="jd-panel-title">Shortlist / Select Students</h3>
                                 <div className="jd-student-list">
@@ -294,7 +296,7 @@ export function JobDetailPage() {
                         </button>
 
                         {/* Students in Drive panel */}
-                        {studentinthisDriveMode && (
+                        {activePanel === 'drivestudents' && (
                             <div className="jd-panel">
                                 <h3 className="jd-panel-title">Students in This Drive</h3>
                                 <div className="jd-student-list">

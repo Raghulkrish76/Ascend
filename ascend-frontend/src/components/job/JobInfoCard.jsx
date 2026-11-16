@@ -31,7 +31,7 @@ export function JobInfoCard({ job }) {
             <div className="jd-meta-tile__body">
               <span className="jd-meta-tile__label">Stipend</span>
               <span className="jd-meta-tile__value">
-                {job.stipend ? `${job.stipend}` : "—"}
+                {job.stipend ? `${job.stipend} -/ per month` : "—"}
               </span>
             </div>
           </div>
@@ -41,7 +41,7 @@ export function JobInfoCard({ job }) {
             <div className="jd-meta-tile__body">
               <span className="jd-meta-tile__label">Salary</span>
               <span className="jd-meta-tile__value">
-                {job.salary ? `₹${job.salary}` : "—"}
+                {job.salary ? `₹${job.salary} LPA` : "—"}
               </span>
             </div>
           </div>
